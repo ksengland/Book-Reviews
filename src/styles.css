@@ -1,0 +1,21 @@
+
+.card {
+  margin-bottom: 25px;
+  border-color: darkgoldenrod;
+}
+
+.card-header{
+  background-color: maroon;
+  color: darkgoldenrod;
+}
+
+.divider{
+  border-color: maroon;
+  background-color: maroon;
+  text-align: center;
+}
+
+.h1{
+  padding-top: 25px;
+  padding-bottom: 25px;
+}

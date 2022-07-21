@@ -1,17 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+function App() {
+  const [data, setData] = React.useState(null);
+  const [loaded, setLoaded] = React.useState(false);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+  React.useEffect(() => {
+    async function getData() {
+      const response = await fetch("./books.json");
+      const json = await response.json();
+      setData(json);
+      setLoaded(true);
+    }
+    getData();
+  }, []);
+  console.log("loaded:", loaded, "data", data);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  return (
+    <div className="container">
+      <h1>My Book Reviews</h1>
+      <>{loaded && data.books.map((book, i) => <Book data={book} key={i} />)}</>
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
